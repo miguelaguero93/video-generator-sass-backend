@@ -10,6 +10,7 @@ import { ExecutionsModule } from './executions/executions.module';
 import { GatewayModule } from './gateway/gateway.module';
 import { MediaModule } from './media/media.module';
 import { UsersModule } from './users/users.module';
+import { CreditsModule } from './credits/credits.module';
 import { User } from './users/entities/user.entity';
 import { Workflow } from './workflows/entities/workflow.entity';
 import { Execution } from './executions/entities/execution.entity';
@@ -32,6 +33,7 @@ import { Execution } from './executions/entities/execution.entity';
     ExecutionsModule,
     GatewayModule,
     MediaModule,
+    CreditsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

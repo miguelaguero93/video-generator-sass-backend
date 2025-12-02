@@ -6,6 +6,7 @@ import { Execution } from './entities/execution.entity';
 import { WorkflowsModule } from '../workflows/workflows.module';
 import { UsersModule } from '../users/users.module';
 import { GatewayModule } from '../gateway/gateway.module';
+import { CreditsModule } from '../credits/credits.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { GatewayModule } from '../gateway/gateway.module';
     WorkflowsModule,
     UsersModule,
     GatewayModule,
+    CreditsModule,
   ],
   controllers: [ExecutionsController],
   providers: [ExecutionsService],

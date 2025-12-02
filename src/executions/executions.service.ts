@@ -5,6 +5,7 @@ import { Execution } from './entities/execution.entity';
 import { Gateway } from '../gateway/gateway.gateway';
 import { WorkflowsService } from '../workflows/workflows.service';
 import { UsersService } from '../users/users.service';
+import { CreditsService } from '../credits/credits.service';
 import axios from 'axios';
 
 @Injectable()
@@ -15,6 +16,7 @@ export class ExecutionsService {
     private gateway: Gateway,
     private workflowsService: WorkflowsService,
     private usersService: UsersService,
+    private creditsService: CreditsService,
   ) {}
 
   async createExecution(userId: number, workflowId: number, inputData: any, name?: string) {
@@ -25,12 +27,9 @@ export class ExecutionsService {
       throw new Error('User or Workflow not found');
     }
 
-    if (user.credits < workflow.cost) {
-      throw new Error('Insufficient credits');
-    }
-
-    // Deduct credits
-    await this.usersService.update(userId, { credits: user.credits - workflow.cost });
+    // Deduct credits using CreditsService
+    // This will throw BadRequestException if insufficient credits
+    await this.creditsService.deductCredits(userId, workflow.cost);
 
     // Create execution record
     const execution = this.executionsRepository.create({
