@@ -14,13 +14,16 @@ import { CreditsModule } from './credits/credits.module';
 import { User } from './users/entities/user.entity';
 import { Workflow } from './workflows/entities/workflow.entity';
 import { Execution } from './executions/entities/execution.entity';
+import { CreditPackage } from './credits/entities/credit-package.entity';
+import { SystemSetting } from './admin/entities/system-setting.entity';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'database.sqlite',
-      entities: [User, Workflow, Execution],
+      entities: [User, Workflow, Execution, CreditPackage, SystemSetting],
       synchronize: true, // Set to false in production
     }),
     ServeStaticModule.forRoot({
@@ -34,6 +37,7 @@ import { Execution } from './executions/entities/execution.entity';
     GatewayModule,
     MediaModule,
     CreditsModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],
